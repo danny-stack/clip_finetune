@@ -4,13 +4,10 @@ This repository contains code for fine-tuning OpenAI's CLIP (Contrastive Languag
 
 ## Overview
 
-The project fine-tunes the `clip-vit-base-patch32` model on an Indo-fashion dataset to improve its performance on fashion-specific image-text matching tasks. We implement various training optimizations including:
+The project fine-tunes the `clip-vit-base-patch32` model on an Indo-fashion dataset to improve its performance on fashion-specific image-text matching tasks. The data we use:
 
-- Mixed precision training
-- Gradient accumulation
-- Early stopping
-- Learning rate scheduling
-- Vision and text encoder backbone freezing
+**Image**: "./indo-fashion-dataset/versions/15/images/"
+**Text**: "product_title" in the json files
 
 
 ## Performance Metrics
