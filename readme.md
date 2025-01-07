@@ -12,31 +12,16 @@ The project fine-tunes the `clip-vit-base-patch32` model on an Indo-fashion data
 - Learning rate scheduling
 - Vision and text encoder backbone freezing
 
-## Project Structure
-
-```
-CLIP_Finetune/
-├── checkpoints/          # Saved model checkpoints
-├── indo-fashion-dataset/ # Dataset files
-├── runs/                 # Training logs
-├── model_train.ipynb     # Training notebook
-├── evaluate.py          # Evaluation script
-├── earlystopping.py    # Early stopping implementation
-└── retrieval_demo.py    # Demo for image-text retrieval
-```
 
 ## Performance Metrics
 
-| Metric | Value |
-|--------|--------|
-| I2T R@1 | 0.1659 |
-| T2I R@1 | 0.1599 |
-| I2T R@5 | 0.3944 |
-| T2I R@5 | 0.3887 |
-| I2T R@10 | 0.5117 |
-| T2I R@10 | 0.5053 |
-| Number of Epochs | 15 |
-| Initial Learning Rate | 5e-5 |
+| Model | I2T R@1 | T2I R@1 | I2T R@5 | T2I R@5 | I2T R@10 | T2I R@10 | Epochs | Learning Rate | Description |
+|-------|---------|---------|---------|---------|-----------|-----------|---------|---------------|-------------|
+| Zero-shot | 0.0351 | 0.0220 | 0.1085 | 0.0707 | 0.1557 | 0.1117 | / | / | Original CLIP without fine-tuning |
+| Vision Freeze | 0.1924 | 0.1873 | 0.4407 | 0.4397 | 0.5607 | 0.5613 | 15 | 5e-5 | Freeze first 6 layers of vision encoder |
+| MixFreeze | 0.1659 | 0.1599 | 0.3944 | 0.3887 | 0.5117 | 0.5053 | 15 | 5e-5 | Freeze backbone of both encoders |
+| Unfreeze | 0.1652 | 0.1548 | 0.4007 | 0.3861 | 0.5171 | 0.5160 | 20 | 5e-5 | Finetune all the layers |
+
 
 ## Key Features
 
@@ -58,13 +43,6 @@ The evaluation script (`evaluate.py`) computes the following metrics:
 - Text-to-Image Retrieval (T2I)
 - Recall@K (K=1,5,10)
 
-## Usage
-
-For evaluation:
-```python
-metrics = evaluate_model(model, test_loader, device)
-print(metrics)
-```
 
 ## References
 
